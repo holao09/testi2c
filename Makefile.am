@@ -1,8 +1,8 @@
 AUTOMAKE_OPTIONS = foreign
-
-
 CFLAGS = -Wall -pedantic -O2
-AM_LDFLAGS = -L$(LIB_DIR) -li2c
+lib_LTLIBRARIES = libi2c-meta.la
+libi2c-meta_la_SOURCES  = i2c/smbus.c
+libi2c-meta_la_LDFLAGS= -version-info 1:0:0
 bin_PROGRAMS = i2cexample
 bbexample_SOURCES = i2cexample.c
-
+bbexample_LDADD = libi2c-meta.la
