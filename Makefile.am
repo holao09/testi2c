@@ -9,4 +9,4 @@ libi2cmeta_la_LDFLAGS= -version-info 1:0:0 -version-script=i2c/libi2c.map
 
 bin_PROGRAMS = i2cexample
 bbexample_SOURCES = i2cexample.c
-bbexample_LDADD = libi2cmeta.la
+bbexample_LDADD = .libs/libi2cmeta.a
