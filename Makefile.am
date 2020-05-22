@@ -1,6 +1,6 @@
 AUTOMAKE_OPTIONS = foreign
 
-CFLAGS = -Wall -pedantic -O2 --version-script=i2c/libi2c.ma
+CFLAGS = -Wall -pedantic -O2 --version-script=i2c/libi2c.map
 include_HEADERS = i2c/smbus.h
 
 lib_LTLIBRARIES = libi2cmeta.la
