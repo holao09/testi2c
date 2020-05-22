@@ -2,8 +2,8 @@
 # Process this file with autoconf to produce a configure script.
 
 #AC_PREREQ(2.60)
-AC_INIT(i2cexample, 0.1, vietnguyen@vietnm.tk)
-AC_CONFIG_SRCDIR([test.c])
+AC_INIT(i2cexample, 0.1, ajlennon@dynamicdevices.co.uk)
+AC_CONFIG_SRCDIR([i2cexample.c])
 AC_CONFIG_HEADER([config.h])
 AM_INIT_AUTOMAKE(i2cexample, main)
 
