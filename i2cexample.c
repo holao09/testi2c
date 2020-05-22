@@ -89,7 +89,7 @@ int main()
     int address = 0x3C;
     printf("address = %d \n",address);
     int daddress = 0x40;
-    int res;
+    //int res;
 
     if (i2cbus > 0)
         {
@@ -129,7 +129,8 @@ int main()
 
             for (count = 0; count <1024; count++)
                 {
-                    res = i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
+                    //res = 
+                    i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
                 }
         }
     close(file);
