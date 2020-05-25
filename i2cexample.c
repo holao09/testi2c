@@ -243,7 +243,7 @@ void connect()
                             if (errno == EACCES)
                                 fprintf(stderr, "Run as root?\n");
                         }
-                    return 1;
+                    return;
                 }
             printf("filename: %s",filename);
 
