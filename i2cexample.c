@@ -149,7 +149,7 @@ void func_display_off()
     for (count = 0; count <sizeof(display_off); count++)
         {
 
-            i2c_smbus_write_byte_data(file, daddress, display_off[count]);
+            i2c_smbus_write_byte_data(file, 0x00, display_off[count]);
         }
 
     close(file);
@@ -162,7 +162,7 @@ void func_display_init()
     for (count = 0; count <sizeof(init_display); count++)
         {
 
-            i2c_smbus_write_byte_data(file, daddress, init_display[count]);
+            i2c_smbus_write_byte_data(file, 0x00, init_display[count]);
         }
 
     close(file);
@@ -174,7 +174,7 @@ void func_display_on()
     for (count = 0; count <sizeof(display_on); count++)
         {
 
-            i2c_smbus_write_byte_data(file, daddress, display_on[count]);
+            i2c_smbus_write_byte_data(file, 0x00, display_on[count]);
         }
     close(file);
 }
@@ -185,7 +185,7 @@ void func_reset_cursor()
     for (count = 0; count <sizeof(reset_cursor); count++)
         {
 
-            i2c_smbus_write_byte_data(file, daddress, reset_cursor[count]);
+            i2c_smbus_write_byte_data(file, 0x00, reset_cursor[count]);
         }
     close(file);
 }
