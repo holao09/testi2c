@@ -78,16 +78,25 @@ const unsigned char myBitmap []=
     0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 };
 
-const unsigned char init_display[] = {
+const unsigned char init_display[] =
+{
     0xA8,0x3F, 0xD3, 0x00, 0x40, 0xA1, 0xC8,0xDA,0x32,0xA4, 0xA6, 0xD5, 0x80, 0x8D, 0x14, 0x20, 0x20
 };
 
-const unsigned char display_on[] = {
+const unsigned char display_on[] =
+{
     0xAF
 };
 
-const unsigned char display_off[] = {
+const unsigned char display_off[] =
+{
     0xAE
+};
+
+
+const unsigned char reset_cursor[] =
+{
+    0x21, 0x00, 0x7F, 0x22, 0x00, 0x07
 };
 
 int main()
@@ -137,22 +146,34 @@ int main()
             //set_slave_addr(file, address, 0);
 
             ioctl(file,I2C_SLAVE, address);
-            
+
+            for (count = 0; count <sizeof(display_off); count++)
+                {
+
+                    i2c_smbus_write_byte_data(file, daddress, display_off[count]);
+                }
+
             for (count = 0; count <sizeof(init_display); count++)
                 {
-                    //res = 
+
                     i2c_smbus_write_byte_data(file, daddress, init_display[count]);
                 }
-                
-             for (count = 0; count <sizeof(display_on); count++)
+
+            for (count = 0; count <sizeof(display_on); count++)
                 {
-                    //res = 
+
                     i2c_smbus_write_byte_data(file, daddress, display_on[count]);
+                }
+
+            for (count = 0; count <sizeof(reset_cursor); count++)
+                {
+
+                    i2c_smbus_write_byte_data(file, daddress, reset_cursor[count]);
                 }
 
             for (count = 0; count <sizeof(myBitmap); count++)
                 {
-                    //res = 
+
                     i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
                 }
         }
