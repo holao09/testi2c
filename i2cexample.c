@@ -321,6 +321,7 @@ int main()
         usleep(5000);
         func_reset_cursor();
         func_draw_Apple();
+         usleep(5000);
     }
     close(file);
     return 0;
