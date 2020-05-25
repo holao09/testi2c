@@ -299,7 +299,7 @@ void func_draw_Google()
         }
 }
 
-func_draw_Apple()
+void func_draw_Apple()
 {
     for (count = 0; count <sizeof(apple); count++)
         {
