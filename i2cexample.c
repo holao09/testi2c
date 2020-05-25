@@ -100,17 +100,14 @@ const unsigned char reset_cursor[] =
 };
 
 int file;
+int daddress = 0x40;
+int count;
+int i2cbus = 1;
+char filename[20];
+int address = 0x3C;
 
 void connect()
 {
-    char filename[20];
-
-    int count;
-    int i2cbus = 1;
-    printf("i2cbus = %d \n",i2cbus);
-    int address = 0x3C;
-    printf("address = %d \n",address);
-    int daddress = 0x40;
     if (i2cbus > 0)
         {
             int size = sprintf(filename, "/dev/i2c/%d", i2cbus);
@@ -167,7 +164,7 @@ void func_display_init()
 
             i2c_smbus_write_byte_data(file, daddress, init_display[count]);
         }
-        
+
     close(file);
 }
 
@@ -185,7 +182,7 @@ void func_display_on()
 void func_reset_cursor()
 {
     connect();
-   for (count = 0; count <sizeof(reset_cursor); count++)
+    for (count = 0; count <sizeof(reset_cursor); count++)
         {
 
             i2c_smbus_write_byte_data(file, daddress, reset_cursor[count]);
@@ -196,7 +193,7 @@ void func_reset_cursor()
 void func_draw_Google()
 {
     connect();
-   for (count = 0; count <sizeof(myBitmap); count++)
+    for (count = 0; count <sizeof(myBitmap); count++)
         {
 
             i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
