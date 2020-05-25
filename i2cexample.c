@@ -99,18 +99,18 @@ const unsigned char reset_cursor[] =
     0x21, 0x00, 0x7F, 0x22, 0x00, 0x07
 };
 
-int main()
+int file;
+
+void connect()
 {
     char filename[20];
-    int file;
+
     int count;
     int i2cbus = 1;
     printf("i2cbus = %d \n",i2cbus);
     int address = 0x3C;
     printf("address = %d \n",address);
     int daddress = 0x40;
-    //int res;
-
     if (i2cbus > 0)
         {
             int size = sprintf(filename, "/dev/i2c/%d", i2cbus);
@@ -140,43 +140,77 @@ int main()
                         }
                     return 1;
                 }
-
-
             printf("filename: %s",filename);
-            //set_slave_addr(file, address, 0);
 
             ioctl(file,I2C_SLAVE, address);
+        }
+}
 
-            for (count = 0; count <sizeof(display_off); count++)
-                {
+void func_display_off()
+{
+    connect();
+    for (count = 0; count <sizeof(display_off); count++)
+        {
 
-                    i2c_smbus_write_byte_data(file, daddress, display_off[count]);
-                }
+            i2c_smbus_write_byte_data(file, daddress, display_off[count]);
+        }
 
-            for (count = 0; count <sizeof(init_display); count++)
-                {
+    close(file);
+}
 
-                    i2c_smbus_write_byte_data(file, daddress, init_display[count]);
-                }
 
-            for (count = 0; count <sizeof(display_on); count++)
-                {
+void func_display_init()
+{
+    connect();
+    for (count = 0; count <sizeof(init_display); count++)
+        {
 
-                    i2c_smbus_write_byte_data(file, daddress, display_on[count]);
-                }
+            i2c_smbus_write_byte_data(file, daddress, init_display[count]);
+        }
+        
+    close(file);
+}
 
-            for (count = 0; count <sizeof(reset_cursor); count++)
-                {
+void func_display_on()
+{
+    connect();
+    for (count = 0; count <sizeof(display_on); count++)
+        {
 
-                    i2c_smbus_write_byte_data(file, daddress, reset_cursor[count]);
-                }
-
-            for (count = 0; count <sizeof(myBitmap); count++)
-                {
-
-                    i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
-                }
+            i2c_smbus_write_byte_data(file, daddress, display_on[count]);
         }
     close(file);
+}
+
+void func_reset_cursor()
+{
+    connect();
+   for (count = 0; count <sizeof(reset_cursor); count++)
+        {
+
+            i2c_smbus_write_byte_data(file, daddress, reset_cursor[count]);
+        }
+    close(file);
+}
+
+void func_draw_Google()
+{
+    connect();
+   for (count = 0; count <sizeof(myBitmap); count++)
+        {
+
+            i2c_smbus_write_byte_data(file, daddress, myBitmap[count]);
+        }
+    close(file);
+}
+
+int main()
+{
+    func_display_off();
+    func_display_init();
+    func_display_on();
+    func_reset_cursor();
+    func_draw_Google();
+
     return 0;
 }
