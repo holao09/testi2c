@@ -2,6 +2,7 @@ AUTOMAKE_OPTIONS = foreign
 
 CFLAGS = -Wall -pedantic -O2 
 include_HEADERS = i2c/smbus.h
+AM_LDFLAGS = -li2c
 
 lib_LTLIBRARIES = libi2cmeta.la
 libi2cmeta_la_SOURCES  = i2c/smbus.c
